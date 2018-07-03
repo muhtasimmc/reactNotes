@@ -1,0 +1,50 @@
+<style>
+  .box--small{
+    width: 80px;
+    height: 80px;
+  }
+</style>
+<div id='root'></div>
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+<script type="text/babel">
+
+//css in jsx is camelCase instead of kebab-case and it is incased in objects and because it is wrapped in an object, css properties will be seperated by commas instead of semi colon
+
+// css      kebab-case semicolons ;
+// jsx css  camelCase  commas     ,
+
+
+const className = 'box box--small'
+// fields in objects can replaced by variables that have been intialized beforehand ^ BUT variable name MUST be same as the field name
+
+const props = {
+  // className: 'box box--small',
+  className,
+  style: {
+    paddingLeft: 20,
+    background: 'green'
+  }
+
+}
+
+// const element = (
+//   <div>
+//     <div className="box box--small"  style={{paddingLeft: 20}}>box</div>
+//     </div>
+// )
+const element = (
+  <div>
+    <div  {...props} >box</div>
+    </div>
+)
+
+
+
+
+
+ReactDOM.render(element, document.getElementById('root'))
+
+
+</script>

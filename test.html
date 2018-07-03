@@ -1,0 +1,29 @@
+
+<div id='root'></div>
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+<script type="text/babel">
+const root = document.getElementById('root')
+
+const styleObject = {
+  background: '#cccccc',
+  fontSize: 20,
+  fontFamily: 'verdana',
+  textDecoration: 'underline'
+}
+
+
+function Myfunc({style, ...rest}){
+  //passing in props as argument on its own does not actually apply it
+  // you need to add {...props} to the jsx to see an effect
+  return <div className='func className' style={{...styleObject, ...style}} {...rest}/>
+}
+
+const argStyle = {
+  color: 'blue',
+  fontFamily: 'arial'
+}
+ReactDOM.render(<Myfunc style={{...argStyle}}>children</Myfunc>, root)
+
+</script>

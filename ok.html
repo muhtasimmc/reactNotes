@@ -1,0 +1,32 @@
+<h1>hey</h1>
+<div id="root"></div>
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+<script type="text/babel">
+	const rootElement = document.getElementById('root')
+
+	// const element = document.createElement('div')
+	// element.textContent = 'Hello World'
+	// element.className = 'container'
+	// rootElement.appendChild(element)
+
+	// const element = React.createElement('div', {className: 'container'}, "hello", "hi"," how are you")
+
+	const content = "hello world"
+  var name = 'this is a name'
+
+  // a set of 'props' or properties saved in JSON format that be be applied to different elements
+  const props = {
+    className: 'class name from a prop',
+    children: 'children or innerHTML from a prop',
+  }
+
+  // interpolation using {} , it momentarily exits jsx and enters javascript
+	// const element = <div className={name}>{(()=> content)()}</div>
+  const element = <div className= 'backup' {...props} className='override'>override children/innerHTML</div>  // attributes placed before {...props} will serve as BACKUP while attributes placed after will OVERRIDE props
+	console.log(element.props.className)
+	ReactDOM.render(element, rootElement)
+
+
+</script>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>react practice</title>
+	<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+</head>
+<body>
+	<div id='a'></div>
+</body>
+	<script>
+		const a = React.createElement('ul', {className:"ul classname"}, "message?") // within curly braces is JSON therefore it uses colons : NOT equal signs DON'T FORGET
+		const li = React.createElement('li', 'this is a list item')
+		
+
+
+		ReactDOM.render(a, document.getElementById('a'))
+		ReactDOM.render(li, document.querySelector(' ul'))
+
+	</script>
+
+</html>

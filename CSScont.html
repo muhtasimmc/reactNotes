@@ -1,0 +1,57 @@
+<!-- how to properly merge or override properties when you need to while rendering components via functions -->
+<style>
+
+  .box{
+    border: 1px solid;
+  }
+
+  .box--small{
+    width: 50px;
+    height: 50px;
+  }
+  .box--medium{
+    width: 70px;
+    height: 70px;
+  }
+  .box--large{
+    width: 100px;
+    height: 100px;
+  }
+</style>
+<div id='root'></div>
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+<script type="text/babel">
+
+
+// {...props} does a shallow merge of properties so desired properties may be accidentally overridden
+// we must destructure the style prop argument and manually merge it with the style prop in the function to avoid overridding
+// props in the function get overridded by the props in the functions argument when it is called
+function Box({style, size, className='', ...rest}){
+  const sizeClassName = size ? `box--${size}` : ""
+  return (
+  <div>
+    <div className = {`box ${sizeClassName} ${className}`}  style={{paddingLeft: 20, ...style}} {...rest}/>
+  </div>
+)
+}
+const element = (
+  <div>
+    <Box size='small' style={{backgroundColor: 'lightblue'}}>small box</Box>
+    <Box size='medium' style={{backgroundColor: 'pink'}}>small box</Box>
+    <Box size='large' style={{backgroundColor: 'orange'}}>small box</Box>
+
+  </div>
+)
+//so it looks like i'm writing a component function that has prepackaged properties that can be merged with or be overridden by properties that are passed as arguments when creating a new component via said function
+
+// I think these functions help create nuanced components quickly using their predefined props. This is different from an re using a pre-existing component because it allows you to modify them on the fly while ur creating them by passing in arguments. You can think of the function as a component template or model that has general prop values that should probably be changed when creating each component
+
+
+
+
+ReactDOM.render(element, document.getElementById('root'))
+
+
+</script>

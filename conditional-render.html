@@ -1,0 +1,32 @@
+<div id='root'></div>
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+<script type="text/babel">
+
+// any variable passed here is treated as props or a property object containing fields
+// if you put it in curly braces, it gets treated as any normal variable will recieve the value of the corresponding attribute
+
+
+// condition render
+// function hello({message}){
+//   return message ? <div>{message}</div> : <div>No Message</div>
+// }
+
+
+function tick(){
+  const time = new Date().toLocaleTimeString()
+const element = <div> The time is <input value={time}/> </div>
+
+ReactDOM.render(element, document.getElementById('root'))
+}
+
+tick()
+setInterval(tick, 1000)
+// whenever React is rerendering an element, it only re-renders the part of the element that is different and NOT the entire thing
+
+
+
+
+
+</script>
