@@ -1,0 +1,74 @@
+<div id='root'></div>
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+<script type="text/babel">
+
+class StopWatch extends React.Component{
+  // state is like a snapshot of all the variables at one point in time, like a taking a picture
+  // state is an object
+  state = {lapse: 10, running: false}
+  // state and handleRunClick look like member variables that don't need to be written with 'var' or 'function'
+  handleRunClick = () => {
+
+    // instead of plaining putting an object as an argument, you could put a function that returns an object as a argument, so u can do something before the outter function does
+    this.setState(state=> {
+      if(state.running){
+        clearInterval(this.timer) // stops the interval functions
+      }
+      else{
+        const startTime = Date.now() - this.state.lapse
+        // interval functions repeatedly calls our update function
+        this.timer = setInterval(()=>{
+        this.setState({lapse: Date.now() - startTime})
+        })
+      }
+
+
+
+      return {running: !state.running}
+    })
+
+
+  }
+
+  handleClearClick = () => {
+    // stop the setInterval function
+    clearInterval(this.timer)
+
+
+    this.setState({lapse: 0, running: false})
+  }
+
+  //similar to object constructor method in java
+  render(){
+
+    // fields in objects can replaced by variables that have been intialized beforehand
+    const {lapse, running} = this.state // fetches from the initial state
+    const buttonStyles = {
+    border: '1px solid #ccc',
+    background: '#fff',
+    fontSize: '2em',
+    padding: 15,
+    margin: 5,
+    width: 200
+  }
+
+
+  return(
+    <div style={{textAlign: 'center'}}>
+      <label style = {{ fontSize: '5em', display: 'block' }}>{lapse}</label>
+      <button  onClick={this.handleRunClick} style={buttonStyles}>{running ? 'Stop': 'Start'}</button>
+      <button  onClick={this.handleClearClick} style={buttonStyles} >Clear</button>
+    </div>
+  )
+  }
+}
+
+
+
+
+const element = <StopWatch /> // so this like an instance of the StopWatch class
+// the created componenets are essentially objects created from their class, similar to javafx, except here the classes can form a group of compoenents as opposed to simply one in java fx like Button b = new Button('hey')
+ReactDOM.render(element, document.getElementById('root'))
+</script>

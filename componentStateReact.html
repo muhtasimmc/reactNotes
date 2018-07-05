@@ -1,0 +1,41 @@
+<div id='root'></div>
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+<script type="text/babel">
+
+class StopWatch extends React.Component{
+  // state is like a snapshot of all the variables at one point in time, like a taking a picture
+  // state is an object
+  state = {lapse: 0, running: false}
+  render(){
+
+    // fields in objects can replaced by variables that have been intialized beforehand
+    const {lapse, running} = this.props // fetches the ARGUMENTS for each respective instance, similar to stating parameters in the object constructor in java, const {lapse, running} is essentially initializing two variables at the same time and shortcut to doing so that happens here is that an object is assigned to them, so basically it initializes both new variables using the fields of the object that is assigned to them, these new variables are normal variables NOT FIELDS in an object
+    const buttonStyles = {
+    border: '1px solid #ccc',
+    background: '#fff',
+    fontSize: '2em',
+    padding: 15,
+    margin: 5,
+    width: 200
+  }
+
+
+  return(
+    <div style={{textAlign: 'center'}}>
+      <label style = {{ fontSize: '5em', display: 'block' }}>{lapse}</label>
+      <button style={buttonStyles}>{running ? 'Stop': 'Start'}</button>
+      <button style={buttonStyles} >Clear</button>
+    </div>
+  )
+  }
+}
+
+
+
+
+const element = <StopWatch running={false} lapse={0}/> // so this like an instance of the StopWatch class
+// the created componenets are essentially objects created from their class, similar to javafx, except here the classes can form a group of compoenents as opposed to simply one in java fx like Button b = new Button('hey')
+ReactDOM.render(element, document.getElementById('root'))
+</script>

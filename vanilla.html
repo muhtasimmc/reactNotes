@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      practice
+    </title>
+  </head>
+  <body>
+    <div id='d'>0</div>
+    <button id='start' >Start</button>
+    <button id= 'clear' >Clear</button>
+  </body>
+  <script>
+    var running = false
+    var timer;
+    document.addEventListener('DOMContentLoaded', function(){
+      var num = document.getElementById('d')
+      document.getElementById('start').addEventListener('click', function(){
+
+        if(!running){
+          const start = Date.now()-num.innerHTML
+          timer = setInterval(()=>{
+            num.innerHTML = Date.now()-start
+          })
+        }
+        else{
+          clearInterval(timer)
+
+        }
+        running = !running
+        document.getElementById('start').innerHTML = running ? 'Stop': 'Start'
+      })
+
+      document.getElementById('clear').addEventListener('click', function(){
+        clearInterval(timer)
+        num.innerHTML = 0
+      })
+    })
+
+
+  </script>
+</html>

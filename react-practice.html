@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>title</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+  </head>
+  <body>
+    <div  id='root'>
+    </div>
+  </body>
+  <script type='text/babel'>
+    class NoteTaker extends React.Component{
+      state = {name: 'John Doe', address: 'America'}
+
+      typeName = (event)=> {
+        this.setState({name: event.target.value})
+      }
+      typeAddress = event => {
+        this.setState({address: event.target.value})
+      }
+
+      render(){
+        const {name, address} = this.state // fetch values from initial state
+
+        return(
+          <div>
+            <h1>{name}</h1>
+            <input onChange={this.typeName}/>
+            <h2>{address}</h2>
+            <input onChange={this.typeAddress}/>
+          </div>
+        )
+
+      }
+    }
+
+    const element = <NoteTaker />
+    ReactDOM.render(element, document.getElementById('root'))
+  </script>
+</html>
