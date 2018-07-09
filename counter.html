@@ -1,0 +1,62 @@
+<div id='root'></div>
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+<script type="text/babel">
+
+class Counter extends React.Component{
+
+  // lifecycle method order
+  // constructor -> render -> componentDidMount
+
+  // lifecycle method
+  // constructor(...args){
+  //   super(...args)
+  //   this.state = {count: 0}
+  //   this.count = this.count.bind(this) // this runs before render method
+  // }
+
+  // public class fields so don't need to include 'this' keyword in assigned variable
+  state = {count: 0}
+
+
+  // binding function to this and then defining it two steps
+  // count = this.count.bind(this)
+  // auto bind
+  /* count(){
+    this.setState(({count}) =>
+    (
+      {count: count+1}
+    )
+  )
+  }
+  */
+
+
+  count = function(){
+    this.setState(({count})=>
+      ({count: count+1})
+    )
+  }.bind(this)
+
+
+
+  render(){
+    return(
+      <button onClick={this.count}> {/*psuedocode count=button.onClick      onClick=this.count    */}
+        {this.state.count}
+      </button>
+
+    )
+  }
+
+
+
+
+
+}
+
+
+
+ReactDOM.render(<Counter/>, document.getElementById('root'))
+</script>
