@@ -14,6 +14,17 @@
     class NoteTaker extends React.Component{
       state = {name: 'John Doe', address: 'America'}
 
+      foo (param1, param2) {
+        console.log(`${param1} ${param2}`)
+      }
+
+
+      // does not auto bind
+      foo2 (param1, param2) {
+        console.log(`${param1}: ${param2}`)
+      }
+
+      // auto binds
       typeName = (event)=> {
         this.setState({name: event.target.value})
       }
@@ -23,6 +34,22 @@
 
       render(){
         const {name, address} = this.state // fetch values from initial state
+
+        array = ['apple', 'orange']
+        const _foo = this.foo.bind(this, 'this is a')
+        array.map((fruit) => {
+          _foo(fruit)
+        })
+
+        const account = findAccountInDb()
+        // {_id: 1234, name: Dave}
+        const posts = findPostsByAccount(account._id)
+        // [{_id: 5678, message: 'jdshfjkadnsjkdns adjsbjkadsbf'}, {_is: 78978787}, {_id: abc}]
+
+        const _foo2 = this.foo2.bind(this, account._id)
+        posts.map(function(post) {
+          _foo2(post._id)
+        })
 
         return(
           <div>
