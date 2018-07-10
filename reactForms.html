@@ -8,25 +8,19 @@ class NameForm extends React.Component{
 
   handleSubmit = e => {
     e.preventDefault()
-    // console.log(this.refs.input.value)
+    // console.log(this.refs.input.value)  // also a react way
     // console.log(e.target[0]) // you can index into child elements
-    // console.log(e.target[0].value)
+    // console.log(e.target[0].value)     // regular html or dom api
     // console.log({target: e.target})
-    // console.log(e.target.elements.username.value)
-    console.log(this.inputNode.value)
+    // console.log(e.target.elements.username.value)      // regular html or dom api
+    console.log(this.inputNode.value) // react way
   }
 
 
 
   render(){
     return(
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Name:
-          <input ref = {node => this.inputNode = node}  {/*  ref= 'input'  */}  type='text' name='username'/>
-        </label>
-        <button type='submit'>Submit</button>
-      </form>
+
     )
   }
 }

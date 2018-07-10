@@ -1,0 +1,121 @@
+<div id='root'></div>
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+<script type="text/babel">
+
+class FormValidation extends React.Component{
+  state = {user: '', password: '', user_error: true, pass_error: true}  // or null
+
+
+  submitHandler = event => {
+    event.preventDefault()
+
+    // fetch values
+    const user = event.target[0].value
+    const pass = event.target[1].value
+
+    const user_error = this.checkUserError(user) // returns error message if any otherwise returns false
+    const pass_error = this.checkPassError(pass)
+    if(user_error){
+      alert(user_error)
+    }
+    else if(pass_error){
+      alert(pass_error)
+    }
+    else{
+      alert('its all fine and dandy')
+    }
+
+
+
+  }
+
+  checkUserError = user => {
+      if(user.length < 5){
+        return `${user.length} is too short, make sure your username has atleast 5`
+      }
+      return false
+  }
+  checkPassError = pass => {
+    let error = ''
+    if(pass.length < 8){
+      error += `password should have atleast 8 characters please`
+    }
+    if(!(/\d/.test(pass) ))
+    {
+      error += `password must contains digits`
+    }
+    if( !(/[a-z]/i.test(pass)) ){
+      error += `password must contain letters`
+    }
+    return error
+
+  }
+
+  validateUser = event => {
+    let userError = this.checkUserError(event.target.value)
+    this.setState({user_error: userError})
+  }
+
+
+
+  validatePass = event => {
+    let passError = this.checkPassError(event.target.value)
+    this.setState({pass_error: passError})
+  }
+
+  /* method 1 */
+  // disabled = () => {
+  //   if (this.state.user_error && this.state.pass_error){
+  //     return true
+  //   }
+  //   return false
+  // }
+
+
+
+  render(){
+
+    let button
+
+    /* method 2: */
+    // if there is an error
+    if(this.state.user_error && this.state.pass_error){
+      button = <input type='submit' value='submit here'  disabled />
+    }
+    else{
+      button = <input type='submit' value='submit here' />
+    }
+
+
+    return(
+      <div>
+        <form onSubmit={this.submitHandler}>
+          <label>Enter Username</label><br />
+          <input placeholder='atleast 5 characters' onChange={this.validateUser} />
+          <div>{this.state.user_error}</div><br /><br />
+          <label>Enter Password</label><br />
+          <input placeholder='should include letters and numbers' onChange={this.validatePass} />
+          <div>{this.state.pass_error}</div>
+          {/*<input type='submit' value='submit here'  disabled={Boolean(this.disabled)} />
+          // method1 ^ : so you can either assign a function (that checks errors in state) to disabled by first passing it to Boolean()
+          // method2: or you can insert a button variable that in defined in render() using logic that checks the errors in the state
+
+          */}
+          {button}
+        </form>
+      </div>
+    )
+  }
+
+
+
+
+
+}
+
+
+
+ReactDOM.render(<FormValidation/>, document.getElementById('root'))
+</script>
