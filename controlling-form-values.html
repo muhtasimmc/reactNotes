@@ -14,10 +14,54 @@ class MyFancyForm extends React.Component {
     'peach'
   ]
 
+  state = {}
+
   handleCommaSeparatedChange = event => {
     console.log('handleCommaSeparatedChanged')
   }
-  handleMultilineChange = event
+  handleMultilineChange = event=>{
+
+  }
+  handelMultiSelectorChange = event => {
+
+  }
+  render(){
+    return(
+      <div>
+        <div>
+          <label>
+            commage separated values
+            <br />
+            <input />
+            <br />
+          </label>
+          <br />
+        </div>
+        <div>
+          <label>
+            multiline values
+            <br />
+            <textarea/>
+          </label>
+          <br />
+        </div>
+        <div>
+          <label>
+          multi selector values
+          <br />
+          <select multiple size={MyFancyForm.availableOptions.length}>
+            {MyFancyForm.availableOptions.map(fruit=>{
+              return <option value={fruit}>{fruit}</option>
+            })}
+          </select>
+          </label>
+        </div>
+      </div>
+    )
+  }
 }
+
+
+ReactDOM.render(<MyFancyForm/>, document.getElementById('root'))
 
 </script>
